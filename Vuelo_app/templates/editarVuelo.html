@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row">
+  <!-- Columna para editar vuelo -->
+  <div class="col-sm-12 col-md-6 offset-md-3">
+    <h1 class="text-center">Editar Vuelo</h1>
+    <div class="card">
+      <div class="card-body">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="form-group py-2">
+            <label for="txtId_Empleado">ID Empleado</label>
+            <input 
+              type="text" 
+              id="txtId_Empleado" 
+              name="txtId_Empleado" 
+              class="form-control" 
+              value="{{ vuelo.Id_Empleado }}" 
+              required>
+          </div>
+          <div class="form-group py-2">
+            <label for="txtNumero_Vuelo">Número de Vuelo</label>
+            <input 
+              type="text" 
+              id="txtNumero_Vuelo" 
+              name="txtNumero_Vuelo" 
+              class="form-control" 
+              value="{{ vuelo.Numero_Vuelo }}" 
+              required>
+          </div>
+          <div class="form-group py-2">
+            <label for="txtOrigen">Origen</label>
+            <input 
+              type="text" 
+              id="txtOrigen" 
+              name="txtOrigen" 
+              class="form-control" 
+              value="{{ vuelo.Origen }}" 
+              required>
+          </div>
+          <div class="form-group py-2">
+            <label for="txtDestino">Destino</label>
+            <input 
+              type="text" 
+              id="txtDestino" 
+              name="txtDestino" 
+              class="form-control" 
+              value="{{ vuelo.Destino }}" 
+              required>
+          </div>
+          <div class="form-group py-2">
+            <label for="txtHora_llegada">Hora de Llegada</label>
+            <input 
+              type="time" 
+              id="txtHora_llegada" 
+              name="txtHora_llegada" 
+              class="form-control" 
+              value="{{ vuelo.Hora_llegada }}" 
+              required>
+          </div>
+          <div class="form-group py-2">
+            <label for="txtHora_Salida">Hora de Salida</label>
+            <input 
+              type="time" 
+              id="txtHora_Salida" 
+              name="txtHora_Salida" 
+              class="form-control" 
+              value="{{ vuelo.Hora_Salida }}" 
+              required>
+          </div>
+          <div class="form-group py-2">
+            <label for="txtEstado_Vuelo">Estado del Vuelo</label>
+            <input 
+              type="text" 
+              id="txtEstado_Vuelo" 
+              name="txtEstado_Vuelo" 
+              class="form-control" 
+              value="{{ vuelo.Estado_Vuelo }}" 
+              required>
+          </div>
+          <div class="form-group py-3 d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a href="{% url 'inicio_vista' %}" class="btn btn-secondary">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="container mt-5">
+    <h2>¿Estás seguro de que quieres borrar este vuelo?</h2>
+    <p><strong>Vuelo:</strong> {{ vuelo.Numero_Vuelo }} - {{ vuelo.Origen }} a {{ vuelo.Destino }}</p>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sí, borrar vuelo</button>
+    </form>
+
+    <a href="{% url 'inicio_vista' %}" class="btn btn-secondary">Cancelar</a>
+</div>
+{% endblock %}

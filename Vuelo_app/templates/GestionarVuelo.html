@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+{% load static %}
+<div class="row">
+  <!-- Columna izquierda -->
+  <div class="col-sm-12 col-md-4 col-lg-4 xl-4">
+    <h1>Registrar Vuelo</h1>
+    <div class="card">
+      <div class="card-body">
+        <form action="{% url 'registrarVuelo' %}" method="POST">
+          {% csrf_token %}
+          <div class="form-group py-2">
+            <input type="text" id="txtId_Empleado" name="txtId_Empleado" class="form-control"
+                   placeholder="ID Empleado" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtNumero_Vuelo" name="txtNumero_Vuelo" class="form-control"
+                   placeholder="Número de Vuelo" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtOrigen" name="txtOrigen" class="form-control"
+                   placeholder="Origen" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtDestino" name="txtDestino" class="form-control"
+                   placeholder="Destino" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="time" id="txtHora_llegada" name="txtHora_llegada" class="form-control"
+                   placeholder="Hora de Llegada" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="time" id="txtHora_Salida" name="txtHora_Salida" class="form-control"
+                   placeholder="Hora de Salida" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtEstado_Vuelo" name="txtEstado_Vuelo" class="form-control"
+                   placeholder="Estado del Vuelo" required>
+          </div>
+          <div class="form-group py-3">
+            <button type="submit" class="btn btn-primary">Registrar Vuelo</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Columna derecha -->
+  <div class="col-sm-12 col-md-8 col-lg-8 xl-8">
+    <h1>Listado de Vuelos</h1>
+    <img class="w-50" src="{% static 'Aeropuerto8.PNG' %}" alt="Molinar" width="100" height="200">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Id Vuelo</th>
+          <th>Id Empleado</th>
+          <th>Número de Vuelo</th>
+          <th>Origen</th>
+          <th>Destino</th>
+          <th>Hora de Llegada</th>
+          <th>Hora de Salida</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if vuelos %}
+          {% for vuelo in vuelos %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ vuelo.Id_Vuelo }}</td>
+            <td>{{ vuelo.Id_Empleado }}</td>
+            <td>{{ vuelo.Numero_Vuelo }}</td>
+            <td>{{ vuelo.Origen }}</td>
+            <td>{{ vuelo.Destino }}</td>
+            <td>{{ vuelo.Hora_llegada }}</td>
+            <td>{{ vuelo.Hora_Salida }}</td>
+            <td>{{ vuelo.Estado_Vuelo }}</td>
+            <td>
+              <a href="{% url 'editarVuelos' vuelo.Id_Vuelo %}" class="btn btn-primary btn-sm">Editar</a>
+              <a href="{% url 'borrarVuelos' vuelo.Id_Vuelo %}" class="btn btn-danger btn-sm">Borrar</a>
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="10" class="text-center">No hay vuelos registrados.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
