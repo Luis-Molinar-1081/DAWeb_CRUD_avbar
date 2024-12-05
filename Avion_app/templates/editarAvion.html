@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row">
+  <!-- Columna para registrar avión -->
+  <div class="col-sm-12 col-md-6">
+    <h1>Registrar Avión</h1>
+    <div class="card">
+      <div class="card-body">
+        <form action="{% url 'registrarAvion' %}" method="POST">
+          {% csrf_token %}
+          <div class="form-group py-2">
+            <label for="txtId_Avion">ID del Avión</label>
+            <input 
+              type="text" 
+              id="txtId_Avion" 
+              name="txtId_Avion" 
+              class="form-control" 
+              placeholder="ID del avión" 
+              minlength="1" 
+              maxlength="6" 
+              required>
+          </div>
+          <div class="form-group py-2">
+            <label for="txtModelo">Modelo</label>
+            <input 
+              type="text" 
+              id="txtModelo" 
+              name="txtModelo" 
+              class="form-control" 
+              placeholder="Modelo del avión" 
+              maxlength="100" 
+              required>
+          </div>
+          <div class="form-group py-2">
+            <label for="txtAerolinea">Aerolínea</label>
+            <input 
+              type="text" 
+              id="txtAerolinea" 
+              name="txtAerolinea" 
+              class="form-control" 
+              placeholder="Aerolínea" 
+              maxlength="100" 
+              required>
+          </div>
+          <div class="form-group py-2">
+            <label for="numCapacidad_Asientos">Capacidad de Asientos</label>
+            <input 
+              type="number" 
+              id="numCapacidad_Asientos" 
+              name="numCapacidad_Asientos" 
+              class="form-control" 
+              min="1" 
+              max="500" 
+              value="100" 
+              required 
+              placeholder="Cantidad de Asientos">
+          </div>
+          <div class="form-group py-2">
+            <label for="numCapacidad_Carga">Capacidad de Carga (kg)</label>
+            <input 
+              type="number" 
+              id="numCapacidad_Carga" 
+              name="numCapacidad_Carga" 
+              class="form-control" 
+              min="1" 
+              max="5000000" 
+              value="20000" 
+              required 
+              placeholder="Capacidad de Carga">
+          </div>
+          <div class="form-group py-2">
+            <label for="txtAño_Fabricacion">Año de Fabricación</label>
+            <input 
+              type="date" 
+              id="txtAño_Fabricacion" 
+              name="txtAño_Fabricacion" 
+              class="form-control" 
+              placeholder="Año de Fabricación" 
+              maxlength="4" 
+              required>
+          </div>
+          <div class="form-group py-2">
+            <label for="txtEstado_Avion">Estado del Avión</label>
+            <input 
+              type="text" 
+              id="txtEstado_Avion" 
+              name="txtEstado_Avion" 
+              class="form-control" 
+              placeholder="Estado del avión" 
+              maxlength="255">
+          </div>
+          <div class="form-group py-3">
+            <button type="submit" class="btn btn-primary">Guardar Avión</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+  

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="container">
+  <h2>Editar Boleto</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="txtId_Reserva">Id Reserva:</label>
+      <input type="text" name="txtId_Reserva" class="form-control" value="{{ boleto.Id_Reserva }}" required>
+    </div>
+    <div class="form-group">
+      <label for="txtNumero_Boleto">Número Boleto:</label>
+      <input type="text" name="txtNumero_Boleto" class="form-control" value="{{ boleto.Numero_Boleto }}" required>
+    </div>
+    <div class="form-group">
+      <label for="txtPrecio">Precio:</label>
+      <input type="text" name="txtPrecio" class="form-control" value="{{ boleto.Precio }}" required>
+    </div>
+    <div class="form-group">
+      <label for="txtFecha_Emicion">Fecha Emisión:</label>
+      <input type="date" name="txtFecha_Emicion" class="form-control" value="{{ boleto.Fecha_Emicion }}" required>
+    </div>
+    <div class="form-group">
+      <label for="txtEstado_Boleto">Estado Boleto:</label>
+      <input type="text" name="txtEstado_Boleto" class="form-control" value="{{ boleto.Estado_Boleto }}" required>
+    </div>
+    <div class="form-group">
+      <label for="txtClase_Servicio">Clase Servicio:</label>
+      <input type="text" name="txtClase_Servicio" class="form-control" value="{{ boleto.Clase_Servicio }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a href="/" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+{% endblock %}

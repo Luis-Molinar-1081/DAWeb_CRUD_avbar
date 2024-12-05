@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+{% load static %}
+<div class="row">
+  <!-- Columna izquierda -->
+  <div class="col-sm-12 col-md-4 col-lg-4 xl-4">
+    <h1>Registrar Avion</h1>
+    <div class="card">
+      <div class="card-body">
+        <form action="{% url 'registrarAvion' %}" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" id="txtId_Avion" name="txtId_Avion" class="form-control"
+                   placeholder="Id del Avion" minlength="1" maxlength="6" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtModelo" name="txtModelo" class="form-control"
+                   placeholder="Modelo del Avion" maxlength="100" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtAerolinea" name="txtAerolinea" class="form-control"
+                   maxlength="100" required placeholder="Aerolinea">
+          </div>
+          <div class="form-group py-2">
+            <input type="number" id="numCapacidad_Asientos" name="numCapacidad_Asientos" class="form-control"
+                   min="1" max="500" value="100" required placeholder="Cantidad de Asientos">
+          </div>
+          <div class="form-group py-2">
+            <input type="number" id="numCapacidad_Carga" name="numCapacidad_Carga" class="form-control"
+                   min="1" max="5000000" value="20000" required placeholder="Capacidad de Carga">
+          </div>
+          <div class="form-group py-2">
+            <input type="date" id="txtAño_Fabricacion" name="txtAño_Fabricacion" class="form-control"
+                   placeholder="Año de Fabricacion" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtEstado_Avion" name="txtEstado_Avion" class="form-control"
+                   placeholder="Estado del Avion" maxlength="255">
+          </div>
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar Avion</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Columna derecha -->
+  <div class="col-sm-12 col-md-8 col-lg-8 xl-8">
+    <h1>Listado Avion</h1>
+    <img class="w-50" src="{% static 'Aeropuerto2.PNG' %}" alt="Molinar" width="100" height="200">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Id Avion</th>
+          <th>Modelo</th>
+          <th>Aerolinea</th>
+          <th>Capacidad Asientos</th>
+          <th>Capacidad Carga</th>
+          <th>Año de Fabricacion</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in losAviones %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ i.Id_Avion }}</td>
+          <td>{{ i.Modelo }}</td>
+          <td>{{ i.Aerolinea }}</td>
+          <td>{{ i.Capacidad_Asientos }}</td>
+          <td>{{ i.Capacidad_Carga }}</td>
+          <td>{{ i.Año_Fabricacion }}</td>
+          <td>{{ i.Estado_Avion }}</td>
+          <td>
+            <a href="{% url 'seleccionarAvion' i.Id_Avion %}" class="btn btn-info">Editar</a>
+            <a href="{% url 'borrarAvion' i.Id_Avion %}" class="btn btn-danger">Borrar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

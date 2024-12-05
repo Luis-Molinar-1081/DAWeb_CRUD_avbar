@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-6 xl-6">
+    <h1>Editar Empleado</h1>
+    <div class="card">
+      <div class="card-body">
+        <form action="{% url 'editarEmpleado' empleado.Id_Empleado %}" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" id="txtId_Empleado" name="txtId_Empleado" class="form-control"
+                   value="{{ empleado.Id_Empleado }}" readonly>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtNombre" name="txtNombre" class="form-control"
+                   value="{{ empleado.Nombre }}" maxlength="100" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtApellido" name="txtApellido" class="form-control"
+                   value="{{ empleado.Apellido }}" maxlength="100" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtGenero" name="txtGenero" class="form-control"
+                   value="{{ empleado.Genero }}" maxlength="10" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="date" id="txtFecha_de_Nacimiento" name="txtFecha_de_Nacimiento" class="form-control"
+                   value="{{ empleado.Fecha_de_Nacimiento }}" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtNacionalidad" name="txtNacionalidad" class="form-control"
+                   value="{{ empleado.Nacionalidad }}" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtTelefono" name="txtTelefono" class="form-control"
+                   value="{{ empleado.Telefono }}" maxlength="20" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtPuesto" name="txtPuesto" class="form-control"
+                   value="{{ empleado.Puesto }}" maxlength="50" required>
+          </div>
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar Empleado</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

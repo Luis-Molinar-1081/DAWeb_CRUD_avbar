@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+{% load static %}
+<div class="row">
+  <!-- Formulario para registrar boleto -->
+  <div class="col-sm-12 col-md-6">
+    <h1 class="text-center">Registrar Boleto</h1>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group py-2">
+        <label for="txtId_Boleto">ID Boleto</label>
+        <input 
+          type="text" 
+          id="txtId_Boleto" 
+          name="txtId_Boleto" 
+          class="form-control" 
+          required>
+      </div>
+      <div class="form-group py-2">
+        <label for="txtId_Reserva">ID Reserva</label>
+        <input 
+          type="text" 
+          id="txtId_Reserva" 
+          name="txtId_Reserva" 
+          class="form-control" 
+          required>
+      </div>
+      <div class="form-group py-2">
+        <label for="txtNumero_Boleto">Número de Boleto</label>
+        <input 
+          type="text" 
+          id="txtNumero_Boleto" 
+          name="txtNumero_Boleto" 
+          class="form-control" 
+          required>
+      </div>
+      <div class="form-group py-2">
+        <label for="txtPrecio">Precio</label>
+        <input 
+          type="text" 
+          id="txtPrecio" 
+          name="txtPrecio" 
+          class="form-control" 
+          required>
+      </div>
+      <div class="form-group py-2">
+        <label for="txtFecha_Emicion">Fecha de Emisión</label>
+        <input 
+          type="date" 
+          id="txtFecha_Emicion" 
+          name="txtFecha_Emicion" 
+          class="form-control" 
+          required>
+      </div>
+      <div class="form-group py-2">
+        <label for="txtEstado_Boleto">Estado del Boleto</label>
+        <input 
+          type="text" 
+          id="txtEstado_Boleto" 
+          name="txtEstado_Boleto" 
+          class="form-control" 
+          required>
+      </div>
+      <div class="form-group py-2">
+        <label for="txtClase_Servicio">Clase de Servicio</label>
+        <input 
+          type="text" 
+          id="txtClase_Servicio" 
+          name="txtClase_Servicio" 
+          class="form-control" 
+          required>
+      </div>
+      <div class="form-group py-3">
+        <button type="submit" class="btn btn-primary">Registrar Boleto</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Tabla de lista de boletos -->
+  <div class="col-sm-12 col-md-6">
+    <h1 class="text-center">Lista de Boletos</h1>
+    <img class="w-50" src="{% static 'Aeropuerto3.PNG' %}" alt="Molinar" width="100" height="200">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>ID Boleto</th>
+          <th>ID Reserva</th>
+          <th>Número</th>
+          <th>Precio</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Clase</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if boletos %}
+          {% for boleto in boletos %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ boleto.Id_Boleto }}</td>
+              <td>{{ boleto.Id_Reserva }}</td>
+              <td>{{ boleto.Numero_Boleto }}</td>
+              <td>{{ boleto.Precio }}</td>
+              <td>{{ boleto.Fecha_Emicion }}</td>
+              <td>{{ boleto.Estado_Boleto }}</td>
+              <td>{{ boleto.Clase_Servicio }}</td>
+              <td>
+                <a href="{% url 'editarBoleto' boleto.Id_Boleto %}" class="btn btn-primary btn-sm">Editar</a>
+                <a href="{% url 'borrarBoleto' boleto.Id_Boleto %}" class="btn btn-danger btn-sm">Borrar</a>
+              </td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="9" class="text-center">No hay boletos registrados.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
