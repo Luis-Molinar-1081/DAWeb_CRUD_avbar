@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row">
+  <!-- Columna izquierda (Formulario de edición) -->
+  <div class="col-sm-12 col-md-6 col-lg-6 xl-6">
+    <h1>Editar Pasajero</h1>
+    <div class="card">
+      <div class="card-body">
+        <form action="{% url 'editarPasagero' %}" method="POST">
+          {% csrf_token %}
+          <!-- Id de pasajero (Solo lectura para evitar cambios accidentales) -->
+          <div class="form-group">
+            <input type="text" id="txtId_Pasagero" name="txtId_Pasagero" class="form-control" 
+                   value="{{ misPasajeros.Id_Pasagero }}" readonly>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtNombre" name="txtNombre" class="form-control"
+                   value="{{ misPasajeros.Nombre }}" maxlength="100" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtApellido" name="txtApellido" class="form-control"
+                   value="{{ misPasajeros.Apellido }}" maxlength="100" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="number" id="numNumero_Documento" name="numNumero_Documento" class="form-control"
+                   value="{{ misPasajeros.Numero_Documento }}" min="1" max="500" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtNacionalidad" name="txtNacionalidad" class="form-control"
+                   value="{{ misPasajeros.Nacionalidad }}" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="date" id="txtFecha_de_Nacimiento" name="txtFecha_de_Nacimiento" class="form-control"
+                   value="{{ misPasajeros.Fecha_de_Nacimiento }}" maxlength="255">
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtTelefono" name="txtTelefono" class="form-control"
+                   value="{{ misPasajeros.Telefono }}" maxlength="255">
+          </div>
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

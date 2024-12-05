@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row justify-content-center">
+  <!-- Formulario de edición de pago -->
+  <div class="col-sm-12 col-md-8">
+    <h1 class="text-center">Editar Pago</h1>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group py-2">
+        <label for="txtId_Pago">ID Pago</label>
+        <input 
+          type="text" 
+          id="txtId_Pago" 
+          name="txtId_Pago" 
+          class="form-control" 
+          value="{{ pago.Id_Pago }}" 
+          disabled>
+      </div>
+      <div class="form-group py-2">
+        <label for="txtId_Pasagero">ID Pasajero</label>
+        <input 
+          type="text" 
+          id="txtId_Pasagero" 
+          name="txtId_Pasagero" 
+          class="form-control" 
+          value="{{ pago.Id_Pasagero }}" 
+          required>
+      </div>
+      <div class="form-group py-2">
+        <label for="txtId_Empleado">ID Empleado</label>
+        <input 
+          type="text" 
+          id="txtId_Empleado" 
+          name="txtId_Empleado" 
+          class="form-control" 
+          value="{{ pago.Id_Empleado }}" 
+          required>
+      </div>
+      <div class="form-group py-2">
+        <label for="txtId_Vuelo">ID Vuelo</label>
+        <input 
+          type="text" 
+          id="txtId_Vuelo" 
+          name="txtId_Vuelo" 
+          class="form-control" 
+          value="{{ pago.Id_Vuelo }}" 
+          required>
+      </div>
+      <div class="form-group py-2">
+        <label for="txtId_Boleto">ID Boleto</label>
+        <input 
+          type="text" 
+          id="txtId_Boleto" 
+          name="txtId_Boleto" 
+          class="form-control" 
+          value="{{ pago.Id_Boleto }}" 
+          required>
+      </div>
+      <div class="form-group py-2">
+        <label for="txtPrecio">Precio</label>
+        <input 
+          type="text" 
+          id="txtPrecio" 
+          name="txtPrecio" 
+          class="form-control" 
+          value="{{ pago.Precio }}" 
+          required>
+      </div>
+      <div class="form-group py-2">
+        <label for="txtFecha_Pago">Fecha de Pago</label>
+        <input 
+          type="date" 
+          id="txtFecha_Pago" 
+          name="txtFecha_Pago" 
+          class="form-control" 
+          value="{{ pago.Fecha_Pago }}" 
+          required>
+      </div>
+      <div class="form-group py-2">
+        <label for="txtMetodo_Pago">Método de Pago</label>
+        <input 
+          type="text" 
+          id="txtMetodo_Pago" 
+          name="txtMetodo_Pago" 
+          class="form-control" 
+          value="{{ pago.Metodo_Pago }}" 
+          required>
+      </div>
+      <div class="form-group py-2">
+        <label for="txtEstado">Estado</label>
+        <input 
+          type="text" 
+          id="txtEstado" 
+          name="txtEstado" 
+          class="form-control" 
+          value="{{ pago.Estado }}" 
+          required>
+      </div>
+      <div class="form-group py-3 text-center">
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        <a href="/" class="btn btn-secondary">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

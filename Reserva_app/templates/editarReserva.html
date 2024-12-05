@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<h1>Registrar Reserva</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <input type="text" name="txtId_pasajero" value="{{ reserva.Id_pasajero }}" class="form-control" placeholder="Id del Pasajero">
+    </div>
+    <div class="form-group">
+      <input type="text" name="txtId_vuelo" value="{{ reserva.Id_vuelo }}" class="form-control" placeholder="Id del Vuelo">
+    </div>
+    <div class="form-group">
+      <input type="date" name="txtFecha_Reserva" value="{{ reserva.Fecha_Reserva }}" class="form-control">
+    </div>
+    <div class="form-group">
+      <input type="text" name="txtEstado_reserva" value="{{ reserva.Estado_reserva }}" class="form-control" placeholder="Estado de Reserva">
+    </div>
+    <div class="form-group">
+      <input type="text" name="txtClase_Servicio" value="{{ reserva.Clase_Servicio }}" class="form-control" placeholder="Clase de Servicio">
+    </div>
+    <div class="form-group">
+      <input type="text" name="txtNumero_Reserva" value="{{ reserva.Numero_Reserva }}" class="form-control" placeholder="Número de Reserva">
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+  </form>
+  
+  
+      
+{% endblock %}

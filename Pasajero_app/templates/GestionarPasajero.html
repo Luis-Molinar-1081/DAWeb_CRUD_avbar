@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+{% load static %}
+<div class="row">
+  <!-- Columna izquierda (Formulario) -->
+  <div class="col-sm-12 col-md-6 col-lg-6 xl-6">
+    <h1>Registrar Pasajero</h1>
+    <div class="card">
+      <div class="card-body">
+        <form action="{% url 'registrarPasagero' %}" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" id="txtId_Pasagero" name="txtId_Pasagero" class="form-control"
+                   placeholder="Id de el Pasagero" minlength="1" maxlength="6" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtNombre" name="txtNombre" class="form-control"
+                   placeholder="Nombre de el Pasajero" maxlength="100" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtApellido" name="txtApellido" class="form-control"
+                   maxlength="100" required placeholder="Apellido de el Pasajero">
+          </div>
+          <div class="form-group py-2">
+            <input type="number" id="numNumero_Documento" name="numNumero_Documento" class="form-control"
+                   min="1" max="500" value="100" required placeholder="Numero del Documento">
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtNacionalidad" name="txtNacionalidad" class="form-control"
+                   placeholder="Nacionalidad de el Pasajero" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="date" id="txtFecha_de_Nacimiento" name="txtFecha_de_Nacimiento" class="form-control"
+                   placeholder="Fecha de Nacimiento de el Pasajero" maxlength="255">
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtTelefono" name="txtTelefono" class="form-control"
+                   placeholder="Numero de Telefono de el Pasajero" maxlength="255">
+          </div>
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar Pasajero</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Columna derecha (Tabla) -->
+  <div class="col-sm-12 col-md-6 col-lg-6 xl-6">
+    <h1>Listado Pasajero</h1>
+    <img class="w-50" src="{% static 'Aeropuerto6.PNG' %}" alt="Molinar" width="100" height="200">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Id Pasajero</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Numero de Documento</th>
+          <th>Nacionalidad</th>
+          <th>Fecha de Nacimiento</th>
+          <th>Numero de Telefono</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in losPasajeros %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ i.Id_Pasagero }}</td>
+          <td>{{ i.Nombre }}</td>
+          <td>{{ i.Apellido }}</td>
+          <td>{{ i.Numero_Documento }}</td>
+          <td>{{ i.Nacionalidad }}</td>
+          <td>{{ i.Fecha_de_Nacimiento }}</td>
+          <td>{{ i.Telefono }}</td>
+          <td>
+            <a href="{% url 'seleccionarPasagero' i.Id_Pasagero %}" class="btn btn-info">Editar</a>
+            <a href="{% url 'borrarPasagero' i.Id_Pasagero %}" class="btn btn-danger">Borrar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

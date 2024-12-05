@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+{% load static %}
+<div class="row">
+  <!-- Columna izquierda para el formulario -->
+  <div class="col-sm-12 col-md-4 col-lg-4 xl-4">
+    <h1>Registrar Reserva</h1>
+    <div class="card">
+      <div class="card-body">
+        <form action="{% url 'registrarReserva' %}" method="POST">
+          {% csrf_token %}
+          
+          <div class="form-group py-3">
+            <input type="text" id="txtId_pasajero" name="txtId_pasajero" class="form-control"
+                   placeholder="Id de pasajero" maxlength="100" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtId_vuelo" name="txtId_vuelo" class="form-control"
+                   maxlength="100" required placeholder="Id del vuelo">
+          </div>
+          <div class="form-group py-2">
+            <input type="date" id="txtFecha_Reserva" name="txtFecha_Reserva" class="form-control datepicker" placeholder="Fecha de Reserva" required>
+          </div>
+          
+          <div class="form-group py-3">
+            <input type="text" id="txtEstado_reserva" name="txtEstado_reserva" class="form-control"
+                   placeholder="Estado de la Reserva" maxlength="255">
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtClase_Servicio" name="txtClase_Servicio" class="form-control"
+                   placeholder="Clase de servicio" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtNumero_Reserva" name="txtNumero_Reserva" class="form-control"
+                   placeholder="Número de Reserva" maxlength="255">
+          </div>
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar Reserva</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Columna derecha para la tabla -->
+  <div class="col-sm-12 col-md-8 col-lg-8 xl-8">
+    <h1>Listado de Reservas</h1>
+    <img class="w-50" src="{% static 'Aeropuerto7.PNG' %}" alt="Molinar" width="100" height="200">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Id Reserva</th>
+          <th>Id Pasajero</th>
+          <th>Id Vuelo</th>
+          <th>Fecha de Reserva</th>
+          <th>Estado de Reserva</th>
+          <th>Clase de Servicio</th>
+          <th>Número de Reserva</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reserva in reservas %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ reserva.Id_Reserva }}</td>
+          <td>{{ reserva.Id_pasajero }}</td>
+          <td>{{ reserva.Id_vuelo }}</td>
+          <td>{{ reserva.Fecha_Reserva }}</td>
+          <td>{{ reserva.Estado_reserva }}</td>
+          <td>{{ reserva.Clase_Servicio }}</td>
+          <td>{{ reserva.Numero_Reserva }}</td>
+          <td>
+            <a href="{% url 'seleccionarReserva' reserva.Id_Reserva %}" class="btn btn-info">Editar</a>
+            <a href="{% url 'borrarReserva' reserva.Id_Reserva %}" class="btn btn-danger">Borrar</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="9" class="text-center">No hay reservas registradas.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  
+{% endblock %}

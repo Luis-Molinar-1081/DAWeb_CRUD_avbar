@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+{% load static %}
+<div class="row">
+  <!-- Columna izquierda: Formulario Registrar Pago -->
+  <div class="col-sm-12 col-md-4 col-lg-4 xl-4">
+    <h1>Registrar Pago</h1>
+    <div class="card">
+      <div class="card-body">
+        <form method="POST" action="{% url 'registrarPago' %}">
+          {% csrf_token %}
+          <div class="form-group py-2">
+            <input type="text" id="txtId_Pago" name="txtId_Pago" class="form-control" placeholder="Id Pago" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtId_Pasagero" name="txtId_Pasagero" class="form-control" placeholder="Id Pasajero" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtId_Empleado" name="txtId_Empleado" class="form-control" placeholder="Id Empleado" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtId_Vuelo" name="txtId_Vuelo" class="form-control" placeholder="Id Vuelo" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtId_Boleto" name="txtId_Boleto" class="form-control" placeholder="Id Boleto" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtPrecio" name="txtPrecio" class="form-control" placeholder="Precio" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="date" id="txtFecha_Pago" name="txtFecha_Pago" class="form-control" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtMetodo_Pago" name="txtMetodo_Pago" class="form-control" placeholder="Método de Pago" required>
+          </div>
+          <div class="form-group py-2">
+            <input type="text" id="txtEstado" name="txtEstado" class="form-control" placeholder="Estado" required>
+          </div>
+          <div class="form-group py-3">
+            <button type="submit" class="btn btn-primary w-100">Registrar Pago</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Columna derecha: Lista de Pagos -->
+  <div class="col-sm-12 col-md-8 col-lg-8 xl-8">
+    <h1>Lista de Pagos</h1>
+    <img class="w-50" src="{% static 'Aeropuerto5.PNG' %}" alt="Molinar" width="100" height="200">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Id Pago</th>
+          <th>Id Pasajero</th>
+          <th>Id Empleado</th>
+          <th>Id Vuelo</th>
+          <th>Id Boleto</th>
+          <th>Precio</th>
+          <th>Fecha Pago</th>
+          <th>Método Pago</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pago in pagos %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ pago.Id_Pago }}</td>
+            <td>{{ pago.Id_Pasagero }}</td>
+            <td>{{ pago.Id_Empleado }}</td>
+            <td>{{ pago.Id_Vuelo }}</td>
+            <td>{{ pago.Id_Boleto }}</td>
+            <td>{{ pago.Precio }}</td>
+            <td>{{ pago.Fecha_Pago }}</td>
+            <td>{{ pago.Metodo_Pago }}</td>
+            <td>{{ pago.Estado }}</td>
+            <td>
+              <a href="{% url 'editarPago' pago.Id_Pago %}" class="btn btn-info btn-sm">Editar</a>
+              <a href="{% url 'borrarPago' pago.Id_Pago %}" class="btn btn-danger btn-sm">Borrar</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="11" class="text-center">No hay pagos registrados.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
